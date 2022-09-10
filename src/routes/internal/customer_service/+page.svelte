@@ -17,7 +17,8 @@
 	let parcel_data: object = {};
 	let order_data: object = {};
 	let customer_metrics: object = {
-		order_count: 0
+		order_count: 0,
+		order_value: 0
 	};
 
 	async function get_customer_metrics(customer_name: string, type: string) {
@@ -84,28 +85,45 @@
 </Row>
 {#if !parcel_search}
 	<Row>
-		<Column lg={{ span: 4, offset: 6 }}>
+		<Column lg={{ span: 6, offset: 5 }}>
 			<ParcelTrackerForm on:click={submit_callback} bind:order_id />
 		</Column>
 	</Row>
 {:else if parcel_search && !loading}
-	<Row>
-		<Column lg={{ span: 4, offset: 6 }}>
-			<Metric title={'Total Orders'} metric={customer_metrics['order_count']} />
+	<Row padding>
+		<Column lg={{ span: 6, offset: 5 }}>
+			<h2>Customer Stats</h2>
 		</Column>
 	</Row>
 	<Row>
-		<Column lg={{ span: 4, offset: 6 }}>
-			<Metric title={'Total Orders'} metric={customer_metrics['order_count']} />
+		<Column lg={{ span: 6, offset: 5 }}>
+			<Row>
+				<Column>
+					<Metric title={'Total Orders'} metric={customer_metrics['order_count']} />
+				</Column>
+				<Column>
+					<Metric prefix={'£'} title={'Total Revenue'} metric={customer_metrics['order_value']} />
+				</Column>
+			</Row>
 		</Column>
 	</Row>
-	<Row>
-		<Column lg={{ span: 4, offset: 6 }}>
+	<Row padding>
+		<Column lg={{ span: 6, offset: 5 }}>
+			<h2>Order Details</h2>
+		</Column>
+	</Row>
+	<Row padding>
+		<Column lg={{ span: 6, offset: 5 }}>
 			<ParcelOrderTable {order_data} />
 		</Column>
 	</Row>
-	<Row>
-		<Column lg={{ span: 4, offset: 6 }}>
+	<Row padding>
+		<Column lg={{ span: 6, offset: 5 }}>
+			<h2>Journey Details</h2>
+		</Column>
+	</Row>
+	<Row padding>
+		<Column lg={{ span: 6, offset: 5 }}>
 			<ParcelTrackerTable {parcel_data} />
 		</Column>
 	</Row>

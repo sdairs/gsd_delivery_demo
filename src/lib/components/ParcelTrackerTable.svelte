@@ -4,7 +4,7 @@
 	export let parcel_data: object;
 </script>
 
-<table class="order-table">
+<table class="tracker-table">
 	<tbody>
 		<tr>
 			<td>Order ID</td>
@@ -38,32 +38,31 @@
 </table>
 
 <style>
-	.order-table {
+	.tracker-table {
 		border-collapse: collapse;
-		margin: 25px 0;
+		width: 100%;
 		font-size: 0.9em;
 		font-family: sans-serif;
-		min-width: 400px;
 		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	}
-	.order-table thead tr {
+	.tracker-table thead tr {
 		background-color: #009879;
 		color: #ffffff;
 		text-align: left;
 	}
-	.order-table th,
-	.order-table td {
+	.tracker-table th,
+	.tracker-table td {
 		padding: 12px 15px;
 	}
-	.order-table tbody tr {
+	.tracker-table tbody tr {
 		border-bottom: 1px solid #383838;
 	}
 
-	.order-table tbody tr:nth-of-type(even) {
+	.tracker-table tbody tr:nth-of-type(even) {
 		background-color: #252525;
 	}
 
-	.order-table tbody tr:last-of-type {
+	.tracker-table tbody tr:last-of-type {
 		border-bottom: 2px solid #009879;
 	}
 </style>
