@@ -12,7 +12,8 @@
 		Grid,
 		Row,
 		Column,
-		Link
+		Link,
+		OutboundLink
 	} from 'carbon-components-svelte';
 
 	let isOpen = false;
@@ -36,6 +37,13 @@
 				</HeaderPanelLink>
 				<HeaderPanelLink>
 					<Link href="/external/parcel_order">Parcel Order</Link>
+				</HeaderPanelLink>
+				<HeaderPanelDivider>Other</HeaderPanelDivider>
+				<HeaderPanelLink>
+					<OutboundLink href="https://github.com/sdairs/gsd_delivery_demo">GitHub Repo</OutboundLink>
+				</HeaderPanelLink>
+				<HeaderPanelLink>
+					<OutboundLink href="https://tinybird.co">Tinybird</OutboundLink>
 				</HeaderPanelLink>
 			</HeaderPanelLinks>
 		</HeaderAction>
