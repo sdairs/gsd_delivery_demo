@@ -1,38 +1,52 @@
-# create-svelte
+# Parcel Delivery Demo
+This is a demo built for the **Getting Stuff Done With Data** conference.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+It shows how you can built data-driven applications using [Tinybird](tinybird.co).
 
-## Creating a project
+You can find the [live deployment here](https://gsd-delivery-demo.vercel.app/) to play with the application.
 
-If you're seeing this, you've probably already done this step. Congrats!
+# Running the demo locally
+There are three parts to this demo:
+- a web application frontend
+- python scripts to simulate activity
+- Tinybird data projects
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Start by cloning the repo.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+## Web application
+Install the dependencies
 
-## Developing
+`npm install`
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Run the dev server
 
-```bash
-npm run dev
+`npm run dev -- --open`
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+This will open the application in your browser.
 
-## Building
+In the current version, API tokens are hardcoded to the live demo. If you want to run this on your own data project, you'll need to replace the token. This will be improved in later versions.
 
-To create a production version of your app:
+## Python scripts
+Enter the event_processor directly.
 
-```bash
-npm run build
-```
+`cd event_processor`
 
-You can preview the production build with `npm run preview`.
+Create a Python virtual environment.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+`python3 -m venv .venv`
+
+Install the dependencies.
+
+`pip install -r requirements.txt`
+
+In one shell session run:
+
+`python journey_completer.py`
+
+In another shell session run:
+
+`python order_event_generator.py`
+
+## Tinybird data projects
+TBD
+
