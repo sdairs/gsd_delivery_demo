@@ -12,8 +12,16 @@
 		delivered: 0,
 		remaining: 0
 	};
-	let parcel_metrics_pie_ordered_vs_delivered: Array<object> = [];
-	let parcel_metrics_pie_in_vs_out: Array<object> = [];
+
+	let parcel_metrics_pie_ordered_vs_delivered: Array<object> = [
+		{ group: 'Ordered', value: 0 },
+		{ group: 'Delivered', value: 0 }
+	];
+	let parcel_metrics_pie_in_vs_out: Array<object> = [
+		{ group: 'Collected', value: 0 },
+		{ group: 'With Driver', value: 0 }
+	];
+
 	$: {
 		parcel_metrics;
 		parcel_metrics['remaining'] = parcel_metrics['ordered'] - parcel_metrics['delivered'];
@@ -27,6 +35,7 @@
 			value: parcel_metrics['delivered']
 		});
 		parcel_metrics_pie_in_vs_out = [];
+		console.log(parcel_metrics)
 		parcel_metrics_pie_in_vs_out.push({ group: 'Collected', value: parcel_metrics['collected'] });
 		parcel_metrics_pie_in_vs_out.push({
 			group: 'With Driver',
