@@ -14,7 +14,20 @@
 </p>
 
 <div>
-	<img src="tinybirdlogo.png" />
+	<iframe
+		width="560"
+		height="560"
+		src="https://www.youtube.com/embed/l7nu4GWWBCw"
+		title="YouTube video player"
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen
+		class="center"
+	/>
+</div>
+
+<div>
+	<img class="center" src="tinybirdlogo.png" />
 </div>
 
 <style>
@@ -35,6 +48,9 @@
 	img {
 		padding-top: 2rem;
 		max-width: 200px;
+	}
+	.center {
+		padding-top: 2rem;
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
