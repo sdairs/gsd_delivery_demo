@@ -45,6 +45,9 @@
 				<HeaderPanelLink>
 					<OutboundLink href="https://tinybird.co">Tinybird</OutboundLink>
 				</HeaderPanelLink>
+				<HeaderPanelLink>
+					<OutboundLink href="https://analytics.tinybird.co/?token=p.eyJ1IjogIjMwZjM3YTdkLTEyMjYtNDcxYi1hM2ZjLTZhZjc2MGNmNTBiMSIsICJpZCI6ICJlZmI1NTNkMy1hOTM0LTRmZDgtYTE3ZC1hYzQzOTVlZTdiOTEifQ._LUtvgNPQ-npnhNSARML7uVkvI2MUSW2C35htot5J0A&host=https://api.tinybird.co">Web Analytics</OutboundLink>
+				</HeaderPanelLink>
 			</HeaderPanelLinks>
 		</HeaderAction>
 	</HeaderUtilities>
