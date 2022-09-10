@@ -9,7 +9,7 @@
 <h5>In the Grid Menu (top right) you'll find links to different applications.</h5>
 
 <p>
-	This demo ws built by <OutboundLink href="tinybird.co">Tinybird</OutboundLink>. You can sign up
+	This demo was built by <OutboundLink href="tinybird.co">Tinybird</OutboundLink>. You can sign up
 	for free and start building your own applications over realtime data.
 </p>
 
