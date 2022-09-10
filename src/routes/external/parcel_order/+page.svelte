@@ -6,6 +6,7 @@
 	let full_name: string;
 	let pickup_location: string;
 	let destination_location: string;
+	let order_id: string;
 	let response_status: number = 0;
 	$: order_success = response_status == 202 ? true : false;
 
@@ -54,9 +55,10 @@
 		const pickup_coords = coordinates[pickup_location];
 		const destination_coords = coordinates[destination_location];
 		const current_time = new Date(new Date().getTime()).toISOString();
+		order_id = uuidv4();
 		const order_event = {
 			customer_name: full_name,
-			order_id: uuidv4(),
+			order_id: order_id,
 			pickup_coords: Object.values(pickup_coords).join(','),
 			pickup_location: pickup_location,
 			destination_coords: Object.values(destination_coords).join(','),
@@ -82,6 +84,7 @@
 		pickup_location = undefined;
 		destination_location = undefined;
 		response_status = 0;
+		order_id = undefined;
 	}
 </script>
 
@@ -100,16 +103,22 @@
 	</Row>
 {:else if order_success}
 	<Row>
-		<Column lg={{ span: 4, offset: 6 }}>
+		<Column lg={{ span: 8, offset: 4 }}>
 			<!-- <Column > -->
 			<h1>Order successful!</h1>
-			<Button on:click={reset}>Send another?</Button>
+			<h3>Your Order ID</h3>
+			<h4>{order_id}</h4>
+		</Column>
+	</Row>
+	<Row>
+		<Column lg={{ span: 2, offset: 7 }}>
+			<Button on:click={reset}>Reset</Button>
 		</Column>
 	</Row>
 {/if}
 
 <style>
-	h1 {
+	h1, h3, h4 {
 		text-align: center;
 		padding-bottom: 1rem;
 	}
