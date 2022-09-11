@@ -2,8 +2,22 @@
 	import { Column, Row } from 'carbon-components-svelte';
 	import ParcelTrackerForm from '$lib/components/ParcelTrackerForm.svelte';
 	import ParcelTrackerTable from '$lib/components/ParcelTrackerTable.svelte';
+	import Metric from '$lib/components/dashboard/Metric.svelte';
 
 	let order_id: string | number | null;
+	let status: string;
+
+	$: if (!parcel_data) {
+		status = 'Awaiting Collection';
+	} else if (parcel_data['time_at_depot'] == null) {
+		status = 'Collected';
+	} else if (parcel_data['time_with_driver'] == null) {
+		status = 'At Depot';
+	} else if (parcel_data['time_delivered'] == null) {
+		status = 'Out For Delivery';
+	} else {
+		status = 'Delivered';
+	}
 
 	function submit_callback() {
 		get_parcel(order_id);
@@ -17,7 +31,9 @@
 		parcel_search = true;
 
 		let params: URLSearchParams = new URLSearchParams({ order_id: order_id, type: 'history' });
-		let url: URL = new URL('https://api.tinybird.co/v0/pipes/track_parcel_journey_by_id.json?' + params);
+		let url: URL = new URL(
+			'https://api.tinybird.co/v0/pipes/track_parcel_journey_by_id.json?' + params
+		);
 
 		const result = await fetch(url, {
 			headers: {
@@ -39,10 +55,19 @@
 		</Column>
 	</Row>
 {:else if parcel_search && !loading}
-	<Row>
+	<Row padding>
 		<Column lg={{ span: 4, offset: 6 }}>
 			<h1>Parcel Tracker</h1>
-			<ParcelTrackerTable {parcel_data} />
+		</Column>
+	</Row>
+	<Row padding>
+		<Column lg={{ span: 4, offset: 6 }}>
+			<Metric metric={status} title={'Parcel Status'} />
+		</Column>
+	</Row>
+	<Row padding>
+		<Column lg={{ span: 4, offset: 6 }}>
+			<ParcelTrackerTable {parcel_data} {order_id} />
 		</Column>
 	</Row>
 {/if}
