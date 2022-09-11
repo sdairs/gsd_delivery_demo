@@ -124,7 +124,7 @@
 	</Row>
 	<Row padding>
 		<Column lg={{ span: 6, offset: 5 }}>
-			<ParcelTrackerTable {parcel_data} />
+			<ParcelTrackerTable {parcel_data} {order_id} />
 		</Column>
 	</Row>
 {/if}
