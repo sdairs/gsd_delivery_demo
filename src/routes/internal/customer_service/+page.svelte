@@ -55,7 +55,10 @@
 		const result = await fetch(url, {
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICIyOWNjNzQzMS00OGNkLTRhN2EtYjZjYy0yOTIwYTA5YjdiMDEifQ.cbPn9-WIMi-xNlGCqa12UNoLvvpnICKkHuDXHFP_z1w'
+					'Bearer ' +
+					(token == null
+						? 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICIyOWNjNzQzMS00OGNkLTRhN2EtYjZjYy0yOTIwYTA5YjdiMDEifQ.cbPn9-WIMi-xNlGCqa12UNoLvvpnICKkHuDXHFP_z1w'
+						: token)
 			}
 		})
 			.then((r) => r.json())
@@ -81,7 +84,10 @@
 		const result = await fetch(url, {
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJiM2IxYTllZi04OTZlLTQxZTktYmRjMS01YzBkOWU5Njc5MDYifQ.fnPNj4_8PMMa7QuFx53tQBKmsmcBIIWcXG0ChDiKyJ0'
+					'Bearer ' +
+					(token == null
+						? 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJiM2IxYTllZi04OTZlLTQxZTktYmRjMS01YzBkOWU5Njc5MDYifQ.fnPNj4_8PMMa7QuFx53tQBKmsmcBIIWcXG0ChDiKyJ0'
+						: token)
 			}
 		}).then((r) => r.json());
 		if (result['data'].length > 0) {

@@ -56,7 +56,10 @@
 		const result = await fetch(url, {
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJhMDJkZDgxNS0zM2MyLTRkNWQtODE5Yy02MDk5MTc3YTg4OTIifQ.G37JBZ8EO-OiN9PUQXuvWx1g7vtFn1LZWRUAqFKts6Y'
+					'Bearer ' +
+					(token == null
+						? 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJhMDJkZDgxNS0zM2MyLTRkNWQtODE5Yy02MDk5MTc3YTg4OTIifQ.G37JBZ8EO-OiN9PUQXuvWx1g7vtFn1LZWRUAqFKts6Y'
+						: token)
 			}
 		})
 			.then((r) => r.json())
@@ -72,7 +75,10 @@
 		const result = await fetch(url, {
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI4YmY4ODI2MC1mMzY3LTQ3ZDgtODA5Mi01NGMzOGE0YzgyNDAifQ.XbZkDGOJzjIdvQ-yZBNv5rGsBOHLYb1d4ZqsqhBel2g'
+					'Bearer ' +
+					(token == null
+						? 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI4YmY4ODI2MC1mMzY3LTQ3ZDgtODA5Mi01NGMzOGE0YzgyNDAifQ.XbZkDGOJzjIdvQ-yZBNv5rGsBOHLYb1d4ZqsqhBel2g'
+						: token)
 			}
 		})
 			.then((r) => r.json())

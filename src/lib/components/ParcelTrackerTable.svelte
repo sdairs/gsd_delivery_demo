@@ -5,7 +5,7 @@
 	onMount(() => {
 		token = new URL(document.location).searchParams.get('token');
 	});
-	
+
 	export let parcel_data: object;
 	export let order_id: string;
 	export let order_time: string;
@@ -18,7 +18,10 @@
 		const result = await fetch(url, {
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJiYmYwOTAzMy03ODAzLTQ4M2YtODNmMi1iOGQ5N2Q0NzBiNDMifQ.kdShMAz3fwT2jrge3ZDYN3ft02qKlipUpt2_nqrpWFI'
+					'Bearer ' +
+					(token == null
+						? 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJiYmYwOTAzMy03ODAzLTQ4M2YtODNmMi1iOGQ5N2Q0NzBiNDMifQ.kdShMAz3fwT2jrge3ZDYN3ft02qKlipUpt2_nqrpWFI'
+						: token)
 			}
 		}).then((r) => r.json());
 

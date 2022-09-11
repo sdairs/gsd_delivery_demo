@@ -79,7 +79,10 @@
 			body: JSON.stringify(order_event),
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI0NzQzZWRkYy02MzA4LTQ1MDUtOTc1YS1lZmIzMjQ1M2ZjNGYifQ.fCQZ6HYusIX9IfS3YRTLZOjxbwi9GSjyTA7uS6WoCB4'
+					'Bearer ' +
+					(token == null
+						? 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI0NzQzZWRkYy02MzA4LTQ1MDUtOTc1YS1lZmIzMjQ1M2ZjNGYifQ.fCQZ6HYusIX9IfS3YRTLZOjxbwi9GSjyTA7uS6WoCB4'
+						: token)
 			}
 		}).then((res) => {
 			response_status = res.status;
