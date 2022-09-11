@@ -1,17 +1,22 @@
 <script lang="ts">
-import { Button } from "carbon-components-svelte";
+	import { Button } from 'carbon-components-svelte';
 
 	export let order_history: Array<object>;
 </script>
 
 <table class="order-table">
+	<thead>
+		<th>Order ID</th>
+		<th>Pickup</th>
+		<th>Destination</th>
+		<th>Time Ordered</th>
+	</thead>
 	<tbody>
 		{#each order_history as order}
 			<tr>
 				<td>{order['order_id']}</td>
-				<td>{order['customer_name']}</td>
-				<td>{order['destination_location']}</td>
 				<td>{order['pickup_location']}</td>
+				<td>{order['destination_location']}</td>
 				<td>{order['time_ordered']}</td>
 				<Button on:click data-order-id={order['order_id']}>Search</Button>
 			</tr>
@@ -27,11 +32,11 @@ import { Button } from "carbon-components-svelte";
 		font-family: sans-serif;
 		box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 		width: 100%;
+		text-align: left;
 	}
 	.order-table thead tr {
 		background-color: #009879;
 		color: #ffffff;
-		text-align: left;
 	}
 	.order-table th,
 	.order-table td {
