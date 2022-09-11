@@ -5,6 +5,13 @@ import time
 import random
 from uuid import uuid4
 import csv
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+TB_TOKEN = os.getenv('TB_TOKEN')
+if (TB_TOKEN is None):
+    TB_TOKEN = input("No token env var found. Paste your admin token here: ")
 
 costs = {
     'London': {
@@ -115,7 +122,7 @@ def send_events(batch):
     r = requests.post('https://api.tinybird.co/v0/events',
                       params={
                           'name': 'parcel_order_events',
-                          'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI0NzQzZWRkYy02MzA4LTQ1MDUtOTc1YS1lZmIzMjQ1M2ZjNGYifQ.fCQZ6HYusIX9IfS3YRTLZOjxbwi9GSjyTA7uS6WoCB4',
+                          'token': f'{TB_TOKEN}',
                       },
                       data=nd_data)
     if (r.status_code == 202):

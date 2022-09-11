@@ -4,6 +4,14 @@ import json
 from datetime import datetime, timedelta
 import time
 import random
+import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+TB_TOKEN = os.getenv('TB_TOKEN')
+if (TB_TOKEN is None):
+    TB_TOKEN = input("No token env var found. Paste your admin token here: ")
 
 
 def chance(probability):
@@ -70,7 +78,7 @@ def complete_step5(data):
 
 def get_random_drivers(amount):
     params = {
-        'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI1MmQxNjgzYS0xNDFmLTRjMDEtOGE3NS00MzkzODU0NmI4YTMifQ.H9DCLMYogwaj00pDN800pZOOVRMU4Pjc74kespmipL0',
+        'token': f'{TB_TOKEN}',
         'limit': amount
     }
 
@@ -83,7 +91,7 @@ def get_random_drivers(amount):
 
 def recover_state():
     params = {
-        'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI4NjZhZjM4My0yZDdhLTQyMTQtYTM2NS0wNDZlNWQ0YTI1YzcifQ.T4jVJGdu0M5s2hzD74Ah2RxSt-84rGCJVDPqrBviIXU'
+        'token': f'{TB_TOKEN}'
     }
 
     url = f'https://api.tinybird.co/v0/pipes/get_state_last_processed_time.json'
@@ -101,7 +109,7 @@ def send_state(time):
     r = requests.post('https://api.tinybird.co/v0/events',
                       params={
                           'name': 'state_last_processed_time',
-                          'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI0NzQzZWRkYy02MzA4LTQ1MDUtOTc1YS1lZmIzMjQ1M2ZjNGYifQ.fCQZ6HYusIX9IfS3YRTLZOjxbwi9GSjyTA7uS6WoCB4',
+                          'token': f'{TB_TOKEN}',
                       },
                       data=data)
 
@@ -112,7 +120,7 @@ def send_state(time):
 
 def get_latest_orders(time):
     params = {
-        'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI4ZjdkOTA4MC0wZjliLTQyZTYtYjcyNC04ZWY0ZWJjNjgxNjgifQ.l_xAFww7h8_rDzbRH5HHewNLWjgIBbCkXWTPopY26zo',
+        'token': f'{TB_TOKEN}',
         'time_from': time
     }
 
@@ -128,7 +136,7 @@ def send_parcel_events(orders):
     r = requests.post('https://api.tinybird.co/v0/events',
                       params={
                           'name': 'parcel_tracking_events',
-                          'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI0NzQzZWRkYy02MzA4LTQ1MDUtOTc1YS1lZmIzMjQ1M2ZjNGYifQ.fCQZ6HYusIX9IfS3YRTLZOjxbwi9GSjyTA7uS6WoCB4',
+                          'token': f'{TB_TOKEN}',
                       },
                       data=nd_data)
 
@@ -160,7 +168,7 @@ def process_new_orders(orders):
 
 def get_latest_events(amount):
     params = {
-        'token': 'p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJmZTliMGFkNC0zNWQzLTQwYWUtODA5YS1lNzgzNjRhNjlmZTEifQ.ugk1hgNlYURA6VarxYpk1gVu9sinrs-F4lN39IW6Y00',
+        'token': f'{TB_TOKEN}',
         'limit': amount
     }
 
