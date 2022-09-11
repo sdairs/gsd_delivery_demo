@@ -1,6 +1,4 @@
 <script lang="ts">
-	import {} from 'carbon-components-svelte';
-
 	export let order_data: object;
 </script>
 
