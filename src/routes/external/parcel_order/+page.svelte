@@ -8,6 +8,7 @@
 	let destination_location: string;
 	let order_id: string;
 	let response_status: number = 0;
+	let cost: number = 0;
 	$: order_success = response_status == 202 ? true : false;
 
 	const coordinates = {
@@ -65,7 +66,7 @@
 			destination_location: destination_location,
 			event_ts: current_time,
 			time_ordered: current_time,
-			order_cost: costs[pickup_location][destination_location]
+			order_cost: cost
 		};
 		fetch('https://api.tinybird.co/v0/events?name=parcel_order_events', {
 			method: 'POST',
@@ -79,12 +80,17 @@
 		});
 	}
 
+	function destination_change() {
+		cost = costs[pickup_location][destination_location];
+	}
+
 	function reset() {
 		full_name = undefined;
 		pickup_location = undefined;
 		destination_location = undefined;
 		response_status = 0;
 		order_id = undefined;
+		cost = 0;
 	}
 </script>
 
@@ -94,10 +100,12 @@
 			<!-- <Column > -->
 			<h1>Parcel Order Form</h1>
 			<ParcelOrderForm
+				on:change={destination_change}
 				on:click={submit_callback}
 				bind:full_name
 				bind:pickup_location
 				bind:destination_location
+				{cost}
 			/>
 		</Column>
 	</Row>
@@ -118,7 +126,9 @@
 {/if}
 
 <style>
-	h1, h3, h4 {
+	h1,
+	h3,
+	h4 {
 		text-align: center;
 		padding-bottom: 1rem;
 	}

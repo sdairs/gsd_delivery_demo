@@ -4,6 +4,7 @@
 	export let full_name: string;
 	export let pickup_location: string;
 	export let destination_location: string;
+	export let cost: number;
 
 	const pickup_locations = ['None', 'London', 'Paris', 'Chicago', 'Boston', 'Seattle'];
 	$: invalid_pickup = pickup_location == 'None' ? true : false;
@@ -50,11 +51,19 @@
 			disabled={invalid_pickup}
 			invalid={invalid_pickup}
 			invalidText="Pick a valid pickup location first"
+			on:change
 		>
 			{#each destination_locations as location}
 				<SelectItem value={location} />
 			{/each}
 		</Select>
 	</FormGroup>
+	<h2>Cost: £{cost}</h2>
 	<Button disabled={!valid_form} on:click>Submit</Button>
 </Form>
+
+<style>
+	h2 {
+		padding-bottom: 1rem;
+	}
+</style>
