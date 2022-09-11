@@ -24,6 +24,9 @@
 	<HeaderUtilities>
 		<HeaderAction bind:isOpen {transition}>
 			<HeaderPanelLinks>
+				<HeaderPanelLink>
+					<Link href="/">Home</Link>
+				</HeaderPanelLink>
 				<HeaderPanelDivider>Internal Apps</HeaderPanelDivider>
 				<HeaderPanelLink>
 					<Link href="/internal/operational_dashboard">Operational Dashboard</Link>
@@ -40,13 +43,17 @@
 				</HeaderPanelLink>
 				<HeaderPanelDivider>Other</HeaderPanelDivider>
 				<HeaderPanelLink>
-					<OutboundLink href="https://github.com/sdairs/gsd_delivery_demo">GitHub Repo</OutboundLink>
+					<OutboundLink href="https://github.com/sdairs/gsd_delivery_demo">GitHub Repo</OutboundLink
+					>
 				</HeaderPanelLink>
 				<HeaderPanelLink>
 					<OutboundLink href="https://tinybird.co">Tinybird</OutboundLink>
 				</HeaderPanelLink>
 				<HeaderPanelLink>
-					<OutboundLink href="https://analytics.tinybird.co/?token=p.eyJ1IjogIjMwZjM3YTdkLTEyMjYtNDcxYi1hM2ZjLTZhZjc2MGNmNTBiMSIsICJpZCI6ICJlZmI1NTNkMy1hOTM0LTRmZDgtYTE3ZC1hYzQzOTVlZTdiOTEifQ._LUtvgNPQ-npnhNSARML7uVkvI2MUSW2C35htot5J0A&host=https://api.tinybird.co">Web Analytics</OutboundLink>
+					<OutboundLink
+						href="https://analytics.tinybird.co/?token=p.eyJ1IjogIjMwZjM3YTdkLTEyMjYtNDcxYi1hM2ZjLTZhZjc2MGNmNTBiMSIsICJpZCI6ICJlZmI1NTNkMy1hOTM0LTRmZDgtYTE3ZC1hYzQzOTVlZTdiOTEifQ._LUtvgNPQ-npnhNSARML7uVkvI2MUSW2C35htot5J0A&host=https://api.tinybird.co"
+						>Web Analytics</OutboundLink
+					>
 				</HeaderPanelLink>
 			</HeaderPanelLinks>
 		</HeaderAction>
