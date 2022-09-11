@@ -1,16 +1,16 @@
 <script lang="ts">
 	import Metric from '$lib/components/dashboard/Metric.svelte';
-	import { Column, Row, Tile } from 'carbon-components-svelte';
-	import { onMount } from 'svelte';
+	import { Column, Row, Tile, Select, SelectItem } from 'carbon-components-svelte';
 	import { PieChart, AreaChart } from '@carbon/charts-svelte';
+
+	let time_range_minutes: number = 60;
 
 	let parcel_metrics: object = {
 		ordered: 0,
 		collected: 0,
 		at_depot: 0,
 		with_driver: 0,
-		delivered: 0,
-		remaining: 0
+		delivered: 0
 	};
 
 	let parcel_metrics_pie_ordered_vs_delivered: Array<object> = [
@@ -24,7 +24,6 @@
 
 	$: {
 		parcel_metrics;
-		parcel_metrics['remaining'] = parcel_metrics['ordered'] - parcel_metrics['delivered'];
 		parcel_metrics_pie_ordered_vs_delivered = [];
 		parcel_metrics_pie_ordered_vs_delivered.push({
 			group: 'Ordered',
@@ -45,7 +44,7 @@
 	let parcels_ordered_today: Array<object> = [];
 
 	async function get_parcels_metrics(status: string) {
-		let params = new URLSearchParams({ status: status });
+		let params = new URLSearchParams({ status: status, interval: time_range_minutes });
 		let url = new URL('https://api.tinybird.co/v0/pipes/get_parcel_metrics.json?' + params);
 
 		const result = await fetch(url, {
@@ -60,8 +59,9 @@
 		parcel_metrics[status] = result['data'][0]['total'];
 	}
 
-	async function get_parcels_ordered_today() {
-		let url = new URL(`https://api.tinybird.co/v0/pipes/parcels_ordered_over_time.json`);
+	async function get_parcels_ordered_over_time() {
+		let params = new URLSearchParams({ interval: time_range_minutes });
+		let url = new URL('https://api.tinybird.co/v0/pipes/parcels_ordered_over_time.json?' + params);
 
 		const result = await fetch(url, {
 			headers: {
@@ -75,14 +75,15 @@
 		parcels_ordered_today = result['data'];
 	}
 
-	onMount(() => {
+	function get_data() {
 		get_parcels_metrics('ordered');
 		get_parcels_metrics('collected');
 		get_parcels_metrics('at_depot');
 		get_parcels_metrics('with_driver');
 		get_parcels_metrics('delivered');
-		get_parcels_ordered_today();
-	});
+		get_parcels_ordered_over_time();
+	}
+	get_data();
 </script>
 
 <Row>
@@ -92,9 +93,21 @@
 </Row>
 <Row>
 	<Column lg={{ span: 8, offset: 4 }}>
+		<Select labelText="Time Range" on:change={get_data} bind:selected={time_range_minutes}>
+			<SelectItem value="5" text="5 Minutes" />
+			<SelectItem value="15" text="15 Minutes" />
+			<SelectItem value="30" text="30 Minutes" />
+			<SelectItem value="60" text="1 Hour" />
+			<SelectItem value="720" text="12 Hours" />
+			<SelectItem value="1440" text="1 Day" />
+			<SelectItem value="10080" text="7 Days" />
+		</Select>
+	</Column>
+</Row>
+<Row>
+	<Column lg={{ span: 8, offset: 4 }}>
 		<Row padding>
 			<Column><Metric title={'Ordered'} metric={parcel_metrics['ordered']} /></Column>
-			<Column><Metric title={'Remaining'} metric={parcel_metrics['remaining']} /></Column>
 			<Column><Metric title={'Delivered'} metric={parcel_metrics['delivered']} /></Column>
 		</Row>
 		<Row padding>
