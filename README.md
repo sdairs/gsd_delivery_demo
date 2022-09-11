@@ -32,12 +32,17 @@ This will open the application in your browser.
 
 By default, some tokens are hardcoded into the application that let you interact with the demo environment, hosted in a Tinybird managed account.
 
-If you want to connect the web application to your own Tinybird account, see the [Creating a free Tinybird account](#creating-a-free-tinybird-account) sections.
+If you want to connect the web application to your own Tinybird account:
+1. See the [Creating a free Tinybird account](#creating-a-free-tinybird-account) section.
+2. See the [Getting your Admin token](#getting-your-admin-token)
+3. Modify the URL in your browser and add `?token=PASTE_YOUR_TOKEN_HERE` at the end.
 
 ## Tinybird data projects
 The Tinybird data project can be found in `tinybird/project`.
 
-To use the Tinybird data project, see the [Creating a free Tinybird account](#creating-a-free-tinybird-account) sections, and [Getting your Admin token](#getting-your-admin-token).
+To use the Tinybird data project, first:
+1. See the [Creating a free Tinybird account](#creating-a-free-tinybird-account) section.
+2. See the [Getting your Admin token](#getting-your-admin-token)
 
 Now change to the Tinybird dir.
 
