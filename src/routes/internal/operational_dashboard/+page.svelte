@@ -35,7 +35,6 @@
 			value: parcel_metrics['delivered']
 		});
 		parcel_metrics_pie_in_vs_out = [];
-		console.log(parcel_metrics)
 		parcel_metrics_pie_in_vs_out.push({ group: 'Collected', value: parcel_metrics['collected'] });
 		parcel_metrics_pie_in_vs_out.push({
 			group: 'With Driver',
