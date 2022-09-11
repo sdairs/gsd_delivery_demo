@@ -1,0 +1,7 @@
+
+SCHEMA >
+    `id` String,
+    `name` String
+
+ENGINE "MergeTree"
+ENGINE_SORTING_KEY "id"

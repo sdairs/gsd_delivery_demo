@@ -1,0 +1,26 @@
+DESCRIPTION >
+	Get data about 1 parcel by the Order ID
+
+
+NODE get_latest_row
+SQL >
+
+    %
+    select * from parcel_tracking_events_latest_row
+    where order_id == {{ String(order_id) }}
+
+
+
+NODE select_results
+SQL >
+
+    %
+    SELECT * 
+    FROM
+    {% if defined(type) and type == 'history' %}
+    get_latest_row
+    {% else %}
+    get_latest_row
+    {% end %}
+
+

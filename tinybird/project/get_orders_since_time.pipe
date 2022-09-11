@@ -1,0 +1,10 @@
+NODE get_orders_by_time
+SQL >
+
+    %
+    SELECT * FROM parcel_order_events
+    where time_ordered > {{ DateTime(time_from, '2022-09-09 00:00:00', description="Time to start from", required=True) }}
+    order by time_ordered asc
+    limit 100
+
+

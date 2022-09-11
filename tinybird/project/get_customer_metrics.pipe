@@ -1,0 +1,42 @@
+NODE by_customer
+SQL >
+
+    %
+    SELECT * FROM parcel_order_events
+    WHERE customer_name == {{ String(customer_name, 'Alasdair Brown', description='Customer Name') }}
+    ORDER BY time_ordered DESC
+
+
+
+NODE order_count
+SQL >
+
+    SELECT customer_name, count() AS total FROM by_customer
+    GROUP BY customer_name
+
+
+
+NODE order_value
+SQL >
+
+    SELECT sum(order_cost) as total FROM by_customer
+
+
+
+NODE get_result
+SQL >
+
+    %
+    SELECT * 
+    FROM
+    {% if defined(type) and type == 'order_count' %}
+    order_count
+    {% elif defined(type) and type == 'order_value' %}
+    order_value
+    {% elif defined(type) and type == 'order_history' %}
+    by_customer
+    {% else %}
+    order_count
+    {% end %}
+
+

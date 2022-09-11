@@ -1,0 +1,14 @@
+NODE count_by_minute
+SQL >
+
+    %
+    SELECT 
+      1 as group,
+      toUnixTimestamp(toStartOfMinute(time_ordered)) AS date, 
+      count() AS value 
+    FROM parcel_order_events
+    WHERE date > now() - interval {{ Int32(interval, 1440) }} minute
+    GROUP BY date
+    ORDER BY date ASC
+
+

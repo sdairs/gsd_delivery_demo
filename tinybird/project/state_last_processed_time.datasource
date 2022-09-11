@@ -1,0 +1,7 @@
+
+SCHEMA >
+    `time` DateTime64(3) `json:$.time`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "tuple()"
+ENGINE_SORTING_KEY "time"

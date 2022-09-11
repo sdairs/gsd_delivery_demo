@@ -1,0 +1,8 @@
+NODE get_name
+SQL >
+
+    %
+    SELECT name from drivers
+    where id == {{ String(driver_id, '', description='Driver UUID') }}
+
+

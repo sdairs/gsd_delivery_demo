@@ -1,0 +1,69 @@
+NODE ordered
+SQL >
+
+    %
+    SELECT count() as total FROM parcel_order_events
+    WHERE time_ordered > now() - interval {{ Int32(interval, 1440) }} minute
+
+
+
+NODE collected
+SQL >
+
+    %
+    SELECT count() as total FROM get_incomplete_parcel_journies
+    WHERE time_delivered is null and time_with_driver is null and time_at_depot is null and time_collected is not null
+    AND time_collected > now() - interval {{ Int32(interval, 1440) }} minute
+
+
+
+NODE at_depot
+SQL >
+
+    %
+    SELECT count() as total FROM get_incomplete_parcel_journies
+    WHERE time_delivered is null and time_with_driver is null and time_at_depot is not null
+    AND time_at_depot > now() - interval {{ Int32(interval, 1440) }} minute
+
+
+
+NODE with_driver
+SQL >
+
+    %
+    SELECT count() as total FROM get_incomplete_parcel_journies
+    WHERE time_delivered is null and time_with_driver is not null
+    AND time_with_driver > now() - interval {{ Int32(interval, 1440) }} minute
+
+
+
+NODE delivered
+SQL >
+
+    %
+    SELECT count() as total FROM parcel_tracking_events_latest_row
+    WHERE time_delivered is not null
+    AND time_delivered > now() - interval {{ Int32(interval, 1440) }} minute
+
+
+
+NODE handle_input
+SQL >
+
+    %
+    SELECT * FROM 
+    {% if defined(status) and status == 'ordered' %}
+    ordered
+    {% elif defined(status) and status == 'collected' %}
+    collected
+    {% elif defined(status) and status == 'at_depot' %}
+    at_depot
+    {% elif defined(status) and status == 'with_driver' %}
+    with_driver
+    {% elif defined(status) and status == 'delivered' %}
+    delivered
+    {% else %}
+    ordered
+    {% end %}
+
+

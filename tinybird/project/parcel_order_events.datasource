@@ -1,0 +1,15 @@
+
+SCHEMA >
+    `customer_name` String `json:$.customer_name`,
+    `destination_coords` String `json:$.destination_coords`,
+    `destination_location` String `json:$.destination_location`,
+    `event_ts` DateTime64(3) `json:$.event_ts`,
+    `order_id` String `json:$.order_id`,
+    `pickup_coords` String `json:$.pickup_coords`,
+    `pickup_location` String `json:$.pickup_location`,
+    `time_ordered` DateTime64(3) `json:$.time_ordered`,
+    `order_cost` Int16 `json:$.order_cost`
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "tuple()"
+ENGINE_SORTING_KEY "customer_name, pickup_location, destination_location, time_ordered"

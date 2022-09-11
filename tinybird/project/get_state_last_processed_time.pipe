@@ -1,0 +1,6 @@
+NODE get_time
+SQL >
+
+    SELECT max(time) as time FROM state_last_processed_time
+
+

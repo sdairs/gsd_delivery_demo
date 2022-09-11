@@ -1,0 +1,10 @@
+NODE get_rows
+SQL >
+
+    %
+    SELECT * FROM parcel_tracking_events_latest_row
+    WHERE time_delivered IS null
+    ORDER BY rand()
+    LIMIT {{ Int16(limit, 100) }}
+
+

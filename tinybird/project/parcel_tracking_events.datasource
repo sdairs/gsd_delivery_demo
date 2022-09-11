@@ -1,0 +1,15 @@
+
+SCHEMA >
+    `event_ts` DateTime64(3) `json:$.event_ts`,
+    `order_id` String `json:$.order_id`,
+    `driver_id` String `json:$.driver_id`,
+    `time_collected` DateTime64(3) `json:$.time_collected`,
+    `time_ordered` DateTime64(3) `json:$.time_ordered`,
+    `time_at_depot` Nullable(DateTime64(3)) `json:$.time_at_depot`,
+    `time_with_driver` Nullable(DateTime64(3)) `json:$.time_with_driver`,
+    `time_delivered` Nullable(DateTime64(3)) `json:$.time_delivered`
+
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "tuple()"
+ENGINE_SORTING_KEY "time_ordered, order_id"

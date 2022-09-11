@@ -1,0 +1,16 @@
+NODE get_latest_rows
+SQL >
+
+    select 
+      order_id, 
+      max(driver_id) as driver_id,
+      max(event_ts) as event_ts, 
+      max(time_ordered) as time_ordered, 
+      max(time_collected) as time_collected, 
+      max(time_at_depot) as time_at_depot, 
+      max(time_with_driver) as time_with_driver, 
+      max(time_delivered) as time_delivered
+    from parcel_tracking_events
+    group by order_id
+
+

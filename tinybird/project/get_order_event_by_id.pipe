@@ -1,0 +1,8 @@
+NODE get_order
+SQL >
+
+    %
+    SELECT * from parcel_order_events
+    WHERE order_id == {{ String(order_id, '', description='Order UUID') }}
+
+

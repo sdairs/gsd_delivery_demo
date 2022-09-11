@@ -1,0 +1,7 @@
+NODE get_random_driver_id
+SQL >
+
+    %
+    select id from drivers order by rand() limit {{ Int32(limit, 100) }}
+
+
