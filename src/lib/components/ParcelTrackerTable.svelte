@@ -14,7 +14,7 @@
 			<td>{order_id}</td>
 		</tr>
 		<tr>
-			<td>Driver ID</td>
+			<td>Driver</td>
 			<td>{parcel_data && 'driver_id' in parcel_data ? parcel_data['driver_id'] : 'None'}</td>
 		</tr>
 		<tr>

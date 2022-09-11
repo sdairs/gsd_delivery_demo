@@ -43,7 +43,22 @@
 		}).then((r) => r.json());
 
 		parcel_data = result['data'][0];
+		get_driver_name(parcel_data['driver_id']);
 		loading = false;
+	}
+
+	async function get_driver_name(driver_id: string) {
+		let params: URLSearchParams = new URLSearchParams({ driver_id: driver_id });
+		let url = new URL('https://api.tinybird.co/v0/pipes/get_driver_name_by_id.json?' + params);
+
+		const result = await fetch(url, {
+			headers: {
+				Authorization:
+					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJiYmYwOTAzMy03ODAzLTQ4M2YtODNmMi1iOGQ5N2Q0NzBiNDMifQ.kdShMAz3fwT2jrge3ZDYN3ft02qKlipUpt2_nqrpWFI'
+			}
+		}).then((r) => r.json());
+
+		parcel_data['driver_id'] = result['data'][0]['name'];
 	}
 </script>
 
