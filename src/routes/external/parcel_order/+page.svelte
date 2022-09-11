@@ -2,6 +2,12 @@
 	import { Button, Column, Row } from 'carbon-components-svelte';
 	import ParcelOrderForm from '$lib/components/ParcelOrderForm.svelte';
 	import { v4 as uuidv4 } from 'uuid';
+	import { onMount } from 'svelte';
+
+	let token: string | null;
+	onMount(() => {
+		token = new URL(document.location).searchParams.get('token');
+	});
 
 	let full_name: string;
 	let pickup_location: string;

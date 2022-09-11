@@ -7,6 +7,12 @@
 	import CustomerOrderHistoryTable from '$lib/components/CustomerOrderHistoryTable.svelte';
 	import SearchError from '$lib/components/SearchError.svelte';
 	import { Row, Column } from 'carbon-components-svelte';
+	import { onMount } from 'svelte';
+
+	let token: string | null;
+	onMount(() => {
+		token = new URL(document.location).searchParams.get('token');
+	});
 
 	let order_id: string;
 	let customer_name: string;

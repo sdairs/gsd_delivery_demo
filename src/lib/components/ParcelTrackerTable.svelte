@@ -1,4 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
+	let token: string | null;
+	onMount(() => {
+		token = new URL(document.location).searchParams.get('token');
+	});
+	
 	export let parcel_data: object;
 	export let order_id: string;
 	export let order_time: string;

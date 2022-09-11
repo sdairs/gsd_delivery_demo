@@ -2,6 +2,12 @@
 	import Metric from '$lib/components/dashboard/Metric.svelte';
 	import { Column, Row, Tile, Select, SelectItem } from 'carbon-components-svelte';
 	import { PieChart, AreaChart } from '@carbon/charts-svelte';
+	import { onMount } from 'svelte';
+
+	let token: string | null;
+	onMount(() => {
+		token = new URL(document.location).searchParams.get('token');
+	});
 
 	let time_range_minutes: number = 60;
 

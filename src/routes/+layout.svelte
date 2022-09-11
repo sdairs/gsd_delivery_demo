@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import 'carbon-components-svelte/css/g100.css';
 	import '@carbon/charts/styles.css';
 	import {
@@ -15,9 +15,23 @@
 		Link,
 		OutboundLink
 	} from 'carbon-components-svelte';
+	import { onMount } from 'svelte';
 
 	let isOpen = false;
 	let transition = { duration: 200 };
+
+	function url_builder(href: string) {
+		console.log(token);
+		if (token !== null) {
+			return href + '?token=' + token;
+		}
+		return href;
+	}
+
+	let token: string | null;
+	onMount(() => {
+		token = new URL(document.location).searchParams.get('token');
+	});
 </script>
 
 <Header company="Tinybird" platformName="Parcel Company">
@@ -25,21 +39,21 @@
 		<HeaderAction bind:isOpen {transition}>
 			<HeaderPanelLinks>
 				<HeaderPanelLink>
-					<Link href="/">Home</Link>
+					<Link href={url_builder('/')}>Home</Link>
 				</HeaderPanelLink>
 				<HeaderPanelDivider>Internal Apps</HeaderPanelDivider>
 				<HeaderPanelLink>
-					<Link href="/internal/operational_dashboard">Operational Dashboard</Link>
+					<Link href={url_builder('/internal/operational_dashboard')}>Operational Dashboard</Link>
 				</HeaderPanelLink>
 				<HeaderPanelLink>
-					<Link href="/internal/customer_service">Customer Service</Link>
+					<Link href={url_builder('/internal/customer_service')}>Customer Service</Link>
 				</HeaderPanelLink>
 				<HeaderPanelDivider>External Apps</HeaderPanelDivider>
 				<HeaderPanelLink>
-					<Link href="/external/parcel_tracker">Parcel Tracker</Link>
+					<Link href={url_builder('/external/parcel_tracker')}>Parcel Tracker</Link>
 				</HeaderPanelLink>
 				<HeaderPanelLink>
-					<Link href="/external/parcel_order">Parcel Order</Link>
+					<Link href={url_builder('/external/parcel_order')}>Parcel Order</Link>
 				</HeaderPanelLink>
 				<HeaderPanelDivider>Other</HeaderPanelDivider>
 				<HeaderPanelLink>
