@@ -1,10 +1,32 @@
 <script lang="ts">
-	import { Column, Row } from 'carbon-components-svelte';
-	import Metric from './dashboard/Metric.svelte';
-
 	export let parcel_data: object;
-	export let order_id: object;
+	export let order_id: string;
+	export let order_time: string;
+	let driver_name: string;
 
+	async function get_driver_name(driver_id: string) {
+		let params: URLSearchParams = new URLSearchParams({ driver_id: driver_id });
+		let url = new URL('https://api.tinybird.co/v0/pipes/get_driver_name_by_id.json?' + params);
+
+		const result = await fetch(url, {
+			headers: {
+				Authorization:
+					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICJiYmYwOTAzMy03ODAzLTQ4M2YtODNmMi1iOGQ5N2Q0NzBiNDMifQ.kdShMAz3fwT2jrge3ZDYN3ft02qKlipUpt2_nqrpWFI'
+			}
+		}).then((r) => r.json());
+
+		driver_name = result['data'][0]['name'];
+	}
+
+	$: {
+		parcel_data;
+		if (
+			'driver_id' in parcel_data &&
+			(parcel_data['driver_id'] != '' || parcel_data['driver_id'] != undefined)
+		) {
+			get_driver_name(parcel_data['driver_id']);
+		}
+	}
 </script>
 
 <table class="tracker-table">
@@ -14,12 +36,16 @@
 			<td>{order_id}</td>
 		</tr>
 		<tr>
-			<td>Driver</td>
+			<td>Driver ID</td>
 			<td>{parcel_data && 'driver_id' in parcel_data ? parcel_data['driver_id'] : 'None'}</td>
 		</tr>
 		<tr>
+			<td>Driver Name</td>
+			<td>{driver_name ? driver_name : 'None'}</td>
+		</tr>
+		<tr>
 			<td>Ordered</td>
-			<td>{parcel_data && 'time_ordered' in parcel_data ? parcel_data['time_ordered'] : 'None'}</td>
+			<td>{order_time}</td>
 		</tr>
 		<tr>
 			<td>Collected</td>

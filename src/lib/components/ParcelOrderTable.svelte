@@ -15,6 +15,10 @@
 			<td>{order_data['customer_name']}</td>
 		</tr>
 		<tr>
+			<td>Order Time</td>
+			<td>{order_data['time_ordered']}</td>
+		</tr>
+		<tr>
 			<td>Destination Coords</td>
 			<td>{order_data['destination_coords']}</td>
 		</tr>

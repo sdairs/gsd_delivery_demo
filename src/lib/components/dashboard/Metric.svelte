@@ -6,7 +6,7 @@
 	export let prefix: string = '';
 </script>
 
-<Tile>
+<Tile class='metric-tile'>
 	<Row><Column><p>{title}</p></Column></Row>
 	<Row><Column><h2>{prefix}{metric}</h2></Column></Row>
 </Tile>

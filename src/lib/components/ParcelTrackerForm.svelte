@@ -6,7 +6,7 @@
 
 <Form>
 	<FormGroup>
-		<TextInput size="xl" placeholder="Enter your Order ID" bind:value={order_id} />
+		<TextInput size="xl" placeholder="Enter Order ID" bind:value={order_id} />
 	</FormGroup>
-	<Button on:click>Submit</Button>
+	<Button disabled={order_id == ''} on:click>Submit</Button>
 </Form>
