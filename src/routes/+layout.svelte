@@ -34,7 +34,7 @@
 	});
 </script>
 
-<Header company="Tinybird" platformName="Parcel Company">
+<Header company="Magpie" platformName="Mail">
 	<HeaderUtilities>
 		<HeaderAction bind:isOpen {transition}>
 			<HeaderPanelLinks>
