@@ -9,7 +9,7 @@
 		token = new URL(document.location).searchParams.get('token');
 	});
 
-	let time_range_minutes: number = 60;
+	let time_range_minutes: number = 5;
 
 	let parcel_metrics: object = {
 		ordered: 0,
