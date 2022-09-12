@@ -109,7 +109,10 @@
 		const result = await fetch(url, {
 			headers: {
 				Authorization:
-					'Bearer p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI2NTc1ZWJhMC03NjYzLTQ4N2YtOWU0YS05YWUwMzExYmZjNDQifQ.WGw2Bb0bKW0vSrkFXoFkP_wX-TzPH9j3Nhukj3vKsH8'
+					'Bearer ' +
+					(token == null
+						? ' p.eyJ1IjogImQwZWIyNzhmLTk4ZTQtNDMxNC1hMDMzLWM0OTBkZDU1ODQ0MCIsICJpZCI6ICI2NTc1ZWJhMC03NjYzLTQ4N2YtOWU0YS05YWUwMzExYmZjNDQifQ.WGw2Bb0bKW0vSrkFXoFkP_wX-TzPH9j3Nhukj3vKsH8'
+						: token)
 			}
 		}).then((r) => r.json());
 
