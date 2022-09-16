@@ -1,3 +1,4 @@
+from doctest import REPORT_CDIFF
 import requests
 import ndjson as nd
 from datetime import datetime, timedelta
@@ -97,11 +98,18 @@ def coords_to_string(location):
     return f'{lat},{lon}'
 
 
-def generate_event():
+def create_date_iso(previous_time, time_delta_seconds):
+    if '.' not in previous_time:
+        previous_time = previous_time + '.0'
+    previous_time_dt = datetime.strptime(previous_time, '%Y-%m-%dT%H:%M:%S.%f')
+    new_time = previous_time_dt + timedelta(seconds=time_delta_seconds)
+    return new_time.isoformat()
+
+
+def generate_event(date_iso):
     global repeat_customers
     pickup_location = random_pickup_location()
     destination_location = random_destination_location(pickup_location)
-    current_time = datetime.utcnow().isoformat()
     order_event = {
         'customer_name': (random.choice(repeat_customers)[0] if chance(0.2) else get_fake_name()),
         'order_id': str(uuid4()),
@@ -109,11 +117,24 @@ def generate_event():
         'pickup_location': pickup_location,
         'destination_coords': coords_to_string(destination_location),
         'destination_location': destination_location,
-        'event_ts': current_time,
-        'time_ordered': current_time,
+        'event_ts': date_iso,
+        'time_ordered': date_iso,
         'order_cost': costs[pickup_location][destination_location]
     }
     return order_event
+
+
+def get_latest_parcel_order_time():
+    params = {
+        'token': 'p.eyJ1IjogIjMxYzFkMzllLTIzZjEtNDBmMC05ZjRhLTQ0NjliNThhNDE1MCIsICJpZCI6ICJlYTgxNDZjNi1mZjBlLTQ5MjktODBmOS1hNjhiNWNlNDUxNDcifQ.8siSrZxri7IlS4wdDMtPOiVYYLXMGXgxnVUSRcXhgMw'
+    }
+    url = f'https://api.tinybird.co/v0/pipes/get_latest_order_time.json'
+    response = requests.get(url, params=params)
+    if (response.status_code == 200):
+        r = response.json()
+        if (len(r['data']) > 0):
+            return datetime.strptime(r['data'][0]['time'], '%Y-%m-%d %H:%M:%S.%f').isoformat()
+    return None
 
 
 def send_events(batch):
@@ -131,12 +152,18 @@ def send_events(batch):
 
 
 batch = []
-batch_size = random.randint(10, 200)
+eps = 1000
+last_sent_time = get_latest_parcel_order_time()
+if (not last_sent_time):
+    last_sent_time = (datetime.utcnow() - timedelta(days=7)).isoformat()
+
 while True:
-    batch.append(generate_event())
-    if (len(batch) >= batch_size):
-        if (send_events(batch)):
-            batch = []
-            print(f'Batch sent: {batch_size} rows')
-            batch_size = random.randint(10, 200)
-            time.sleep(2)
+    wait = 1/eps
+    event = generate_event(create_date_iso(last_sent_time, wait))
+    last_sent_time = event['event_ts']
+    batch.append(event)
+    if (len(batch) == eps):
+        send_events(batch)
+        print(f'{datetime.utcnow().isoformat()} - batch sent: {len(batch)} rows')
+        batch = []
+    time.sleep(wait)
