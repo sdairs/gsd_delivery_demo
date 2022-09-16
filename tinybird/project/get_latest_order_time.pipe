@@ -1,0 +1,4 @@
+NODE get_latest_time
+SQL >
+    SELECT max(event_ts) as time FROM parcel_order_events
+    LIMIT 1
